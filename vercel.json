@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/check?token=FQhJluyjkLBgb6pPSCi38WjNy1fzCGO9",
+      "schedule": "*/10 * * * *"
+    }
+  ]
+}
