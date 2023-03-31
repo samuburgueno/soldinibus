@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
   if (req.method !== "GET") return res.status(404).json("Method not allowed");
   if (!token || token !== process.env.TOKEN)
-    return res.status(404).json("Token required");
+    return res.status(404).json("Token required.");
 
   await prisma.params.update({
     where: {
