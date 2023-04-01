@@ -10,7 +10,7 @@ export default function Home({ data, season, lastJob }) {
     <div className="d-flex p-2 justify-content-center align-items-center min-vh-100 min-vw-100 mt-2">
       <div className="wrapper">
         <div className="text-center mb-3">
-          <Countdown fechaProximoEvento={moment(lastJob).add(1, "hour")} />
+          <Countdown fechaProximoEvento={moment(lastJob).add(30, "minutes")} />
         </div>
         {data.map((route) => (
           <Card key={route.id} {...route} season={season} />
