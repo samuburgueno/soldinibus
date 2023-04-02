@@ -15,6 +15,7 @@ const Countdown = ({ fechaProximoEvento }) => {
     };
   }, [fechaProximoEvento]);
 
+  const segundos = Math.floor((tiempoRestante / 1000) % 60);
   const minutos = Math.floor((tiempoRestante / 1000 / 60) % 60);
 
   if (tiempoRestante <= 0)
@@ -29,7 +30,9 @@ const Countdown = ({ fechaProximoEvento }) => {
   return (
     <div>
       <span className="badge rounded-pill text-bg-primary">
-        Proxima revisión en {minutos} minutos
+        {`Proxima revisión en ${
+          minutos > 0 ? minutos + " minutos" : segundos + " segundos"
+        } `}
       </span>
     </div>
   );
