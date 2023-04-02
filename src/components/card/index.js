@@ -38,21 +38,19 @@ export const Card = (props) => {
     <div className="toast show mb-2">
       <div className="toast-header">
         <strong className="me-auto">{props.title}</strong>
-        {/* <small>Hace {diffInMinutes} mins</small> */}
       </div>
       <div className="toast-body text-center">
         <span className="badge pill text-bg-light mb-3">
-          Horario actualizado el{" "}
-          {moment(props.updated).format("DD/MM/YYYY HH:mm")}hs
+          Última actualización: {moment(props.updated).format("DD/MM/YYYY")}
         </span>
         <button
           type="button"
           onClick={openWindowWithPost}
-          className="btn btn-sm btn-outline-primary rounded-5 d-block m-auto"
+          className="btn btn-sm btn-warning rounded-2 d-block m-auto text-uppercase"
           style={{
             "--bs-btn-padding-y": ".25rem",
             "--bs-btn-padding-x": ".5rem",
-            "--bs-btn-font-size": ".75rem",
+            "--bs-btn-font-size": ".65rem",
           }}
         >
           Ver horarios

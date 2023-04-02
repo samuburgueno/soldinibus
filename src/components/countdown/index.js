@@ -21,15 +21,13 @@ const Countdown = ({ fechaProximoEvento }) => {
   if (tiempoRestante <= 0)
     return (
       <div>
-        <span className="badge rounded-pill text-bg-primary">
-          Recarga la página
-        </span>
+        <span className="badge rounded-2 text-bg-light">Recarga la página</span>
       </div>
     );
 
   return (
     <div>
-      <span className="badge rounded-pill text-bg-primary">
+      <span className="badge rounded-2 text-bg-light">
         {`Proxima revisión en ${
           minutos > 0 ? minutos + " minutos" : segundos + " segundos"
         } `}

@@ -16,8 +16,10 @@ export default function Home({ data, season, lastJob }) {
           <Card key={route.id} {...route} season={season} />
         ))}
         <div className="text-center p-2">
-          <span className="badge text-bg-light">
+          <span className="badge rounded-2 text-bg-light">
             <Link
+              style={{ textDecoration: "none", fontSize: 10 }}
+              className="text-uppercase text-secondary"
               title="samuburgueno@gmail.com"
               href="mailto:samuburgueno@gmail.com"
             >
