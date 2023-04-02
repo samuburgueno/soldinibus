@@ -16,16 +16,17 @@ export default function Home({ data, season, lastJob }) {
           <Card key={route.id} {...route} season={season} />
         ))}
         <div className="text-center p-2">
-          <span className="badge rounded-2 text-bg-light">
+          <small className="d-block m-2" style={{ fontSize: 11 }}>
+            La información publicada es obtenida
+            <br /> desde la web oficial del ETR. <br />
             <Link
-              style={{ textDecoration: "none", fontSize: 10 }}
-              className="text-uppercase text-secondary"
+              style={{ textDecoration: "none", color: "var(--bs-body-color)" }}
               title="samuburgueno@gmail.com"
               href="mailto:samuburgueno@gmail.com"
             >
               Hecho por @samuburgueno
             </Link>
-          </span>
+          </small>
         </div>
       </div>
     </div>
