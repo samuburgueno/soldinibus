@@ -1,4 +1,5 @@
 import { processJobs } from "@/functions";
+import { User } from "@/models/user";
 import { prisma } from "@/prisma/client";
 
 export default async function handler(req, res) {
@@ -17,7 +18,10 @@ export default async function handler(req, res) {
     },
   });
   const updated = await processJobs();
+
   if (updated) {
+    // Send notification to all user registered in the bot with details about the bus schedule
+    await User.notify();
     res.status(200).json("Se actualizó la información.");
   } else {
     res.status(200).json("Sin cambios.");

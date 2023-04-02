@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const Countdown = ({ fechaProximoEvento }) => {
-  const [tiempoRestante, setTiempoRestante] = useState(0);
+  const [tiempoRestante, setTiempoRestante] = useState();
 
   useEffect(() => {
     const intervalo = setInterval(() => {
@@ -15,15 +15,28 @@ const Countdown = ({ fechaProximoEvento }) => {
     };
   }, [fechaProximoEvento]);
 
-  const segundos = Math.floor((tiempoRestante / 1000) % 60);
-  const minutos = Math.floor((tiempoRestante / 1000 / 60) % 60);
+  useEffect(() => {
+    if (tiempoRestante !== undefined && tiempoRestante <= 0) {
+      window.location.reload();
+    }
+  }, [tiempoRestante]);
 
-  if (tiempoRestante <= 0)
+  if (tiempoRestante === undefined)
+    return (
+      <div>
+        <span className="badge rounded-2 text-bg-light">Cargando...</span>
+      </div>
+    );
+
+  if (tiempoRestante !== undefined && tiempoRestante <= 0)
     return (
       <div>
         <span className="badge rounded-2 text-bg-light">Recarga la página</span>
       </div>
     );
+
+  const segundos = Math.floor((tiempoRestante / 1000) % 60);
+  const minutos = Math.floor((tiempoRestante / 1000 / 60) % 60);
 
   return (
     <div>

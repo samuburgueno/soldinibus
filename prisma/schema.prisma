@@ -34,3 +34,12 @@ model params {
   id               Int       @id
   lastProcessedJob DateTime?
 }
+
+model user {
+  id        Int    @id @default(autoincrement())
+  tid       Int
+  firstName String
+  lastName  String
+  username  String
+  language  String
+}

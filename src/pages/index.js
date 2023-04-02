@@ -3,12 +3,31 @@ import Countdown from "@/components/countdown";
 import { getTemporada } from "@/functions";
 import { prisma } from "@/prisma/client";
 import moment from "moment";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home({ data, season, lastJob }) {
   return (
     <div className="d-flex p-2 justify-content-center align-items-center min-vh-100 min-vw-100 mt-2">
       <div className="wrapper">
+        <div className="brand text-center mb-3">
+          <p>
+            ¡Recibí notificaciones con el bot de telegram! <br />
+            <a
+              className="btn btn-sm btn-light rounded-2 text-uppercase m-2 mb-0 fw-bold"
+              style={{
+                "--bs-btn-padding-y": ".25rem",
+                "--bs-btn-padding-x": ".5rem",
+                "--bs-btn-font-size": ".75rem",
+              }}
+              href="https://t.me/soldinibus_bot"
+              target="_blank"
+            >
+              &#129302; soldinibus_bot &#129302;
+            </a>
+          </p>
+          <hr className="text-white" />
+        </div>
         <div className="text-center mb-3">
           <Countdown fechaProximoEvento={moment(lastJob).add(30, "minutes")} />
         </div>
