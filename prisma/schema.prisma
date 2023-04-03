@@ -43,3 +43,9 @@ model user {
   username  String
   language  String
 }
+
+model log {
+  id   Int      @id @default(autoincrement())
+  log  Json
+  date DateTime @default(now())
+}
