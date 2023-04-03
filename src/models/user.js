@@ -28,7 +28,7 @@ export const User = {
 
       return user;
     } catch (error) {
-      console.error(error);
+      console.error("registerUser", error);
     }
   },
 
@@ -46,19 +46,23 @@ export const User = {
 
       return user;
     } catch (error) {
-      console.error(error);
+      console.error("deleteUser", error);
     }
   },
 
   async notify() {
-    // Send notification to all user registered in the bot with details about the bus schedule
-    const users = await prisma.user.findMany();
-    users.map(async (user) => {
-      // Enviar un mensaje de bienvenida con el nombre del usuario
-      const message = `${user.firstName}, hubo cambios en el horario del colectivo. Ingresa al siguiente enlace para ver los detalles: <a href="https://soldinibus.com.ar">soldinibus.com.ar</a> :)`;
-      await fetch(
-        `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage?chat_id=${user.tid}&text=${message}&parse_mode=HTML`
-      );
-    });
+    try {
+      // Send notification to all user registered in the bot with details about the bus schedule
+      const users = await prisma.user.findMany();
+      users.map(async (user) => {
+        // Enviar un mensaje de bienvenida con el nombre del usuario
+        const message = `${user.firstName}, hubo cambios en el horario del colectivo. Ingresa al siguiente enlace para ver los detalles: <a href="https://soldinibus.com.ar">soldinibus.com.ar</a> :)`;
+        await fetch(
+          `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage?chat_id=${user.tid}&text=${message}&parse_mode=HTML`
+        );
+      });
+    } catch (error) {
+      console.log("notify", error);
+    }
   },
 };
