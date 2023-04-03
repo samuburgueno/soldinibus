@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   }
 
   // Notificar a todos los usuarios registrados en el bot
-  if (message && message.text === "/test") {
+  if (message && message.text === "/notify") {
     await User.notify();
   }
 
