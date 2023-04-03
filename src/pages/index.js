@@ -3,7 +3,6 @@ import Countdown from "@/components/countdown";
 import { getTemporada } from "@/functions";
 import { prisma } from "@/prisma/client";
 import moment from "moment";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Home({ data, season, lastJob }) {
