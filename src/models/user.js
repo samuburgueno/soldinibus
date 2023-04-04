@@ -3,15 +3,22 @@ import { prisma } from "@/prisma/client";
 export const User = {
   async registerUser(data) {
     try {
-      let user = await prisma.user.findFirst({
-        where: { username: data.username },
-      });
+      let user;
+      if (data.username) {
+        user = await prisma.user.findFirst({
+          where: { username: data.username },
+        });
+      } else {
+        user = await prisma.user.findFirst({
+          where: { tid: data.id },
+        });
+      }
 
       // If user does not exist, create user
       if (!user) {
         user = await prisma.user.create({
           data: {
-            username: data.username,
+            username: data.username ? data.username : "",
             firstName: data.first_name,
             lastName: data.last_name,
             language: data.language_code,
