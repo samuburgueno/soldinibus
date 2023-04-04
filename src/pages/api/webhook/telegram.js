@@ -1,8 +1,16 @@
 import { User } from "@/models/user";
+import { prisma } from "@/prisma/client";
 
 // https://blog.devgenius.io/write-a-simple-telegram-bot-in-next-js-b49379e77163
 // https://api.telegram.org/bot6050581439:AAH5RGQQ_w5NcIypRvl84Ijp_KVVKLyO9Dk/setWebhook?url=https://5f05-200-7-156-46.ngrok.io/api/webhook/telegram
 export default async function handler(req, res) {
+  // Log para guardar el request
+  await prisma.log.create({
+    data: {
+      log: req.body,
+    },
+  });
+
   const { message, my_chat_member } = req.body;
 
   // El usuario se registro en el bot
