@@ -5,7 +5,7 @@ import { prisma } from "@/prisma/client";
 // https://api.telegram.org/bot6050581439:AAH5RGQQ_w5NcIypRvl84Ijp_KVVKLyO9Dk/setWebhook?url=https://5f05-200-7-156-46.ngrok.io/api/webhook/telegram
 export default async function handler(req, res) {
   // Log para guardar el request
-  await prisma.log.create({
+  await prisma.logger.create({
     data: {
       log: req.body,
     },
