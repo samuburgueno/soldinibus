@@ -5,11 +5,15 @@ import { prisma } from "@/prisma/client";
 // https://api.telegram.org/bot6050581439:AAH5RGQQ_w5NcIypRvl84Ijp_KVVKLyO9Dk/setWebhook?url=https://5f05-200-7-156-46.ngrok.io/api/webhook/telegram
 export default async function handler(req, res) {
   // Log para guardar el request
-  await prisma.log.create({
-    data: {
-      log: req.body,
-    },
-  });
+  try {
+    await prisma.log.create({
+      data: {
+        log: req.body,
+      },
+    });
+  } catch (error) {
+    console.log("error al crear el log", error.message);
+  }
 
   const { message, my_chat_member } = req.body;
 
