@@ -1,9 +1,17 @@
 import { prisma } from "@/prisma/client";
 
 export const User = {
-  async registerUser(data) {
+  async registerUser(data, log) {
     try {
+      // Log para guardar el request
+      await prisma.log.create({
+        data: {
+          log,
+        },
+      });
+
       let user;
+
       if (data.username) {
         user = await prisma.user.findFirst({
           where: { username: data.username },
