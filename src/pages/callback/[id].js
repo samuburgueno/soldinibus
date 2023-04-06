@@ -3,7 +3,7 @@ import { getTemporada } from "@/functions";
 import { prisma } from "@/prisma/client";
 import { useEffect, useRef } from "react";
 
-export default function handler({ data, season }) {
+export default function Callback({ data, season }) {
   const formRef = useRef(null);
 
   useEffect(() => {
