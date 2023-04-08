@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     await User.registerUser(req.body.message.from, true);
   }
 
-  if (message && message.text === "/help") {
+  if (message && message.text === "/horarios") {
     await Telegram.buttons(req.body.message.from);
   }
 
