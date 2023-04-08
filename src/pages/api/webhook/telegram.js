@@ -1,8 +1,12 @@
+import Telegram from "@/models/telegram";
 import { User } from "@/models/user";
 import { prisma } from "@/prisma/client";
 
-// https://blog.devgenius.io/write-a-simple-telegram-bot-in-next-js-b49379e77163
-// https://api.telegram.org/bot6050581439:AAH5RGQQ_w5NcIypRvl84Ijp_KVVKLyO9Dk/setWebhook?url=https://5f05-200-7-156-46.ngrok.io/api/webhook/telegram
+/**
+ * https://blog.devgenius.io/write-a-simple-telegram-bot-in-next-js-b49379e77163
+ * https://api.telegram.org/botTOKEN/setWebhook?url=URL/api/webhook/telegram
+ */
+
 export default async function handler(req, res) {
   // Log para guardar el request
   await prisma.logger.create({
@@ -15,7 +19,16 @@ export default async function handler(req, res) {
 
   // El usuario se registro en el bot
   if (message && message.text === "/start") {
-    await User.registerUser(req.body.message.from, req.body);
+    await User.registerUser(req.body.message.from, true);
+  }
+
+  if (message && message.text === "/help") {
+    await Telegram.buttons(req.body.message.from);
+  }
+
+  // Registro a cualquier usuario que envie un mensaje
+  if (message) {
+    await User.registerUser(req.body.message.from);
   }
 
   // Notificar a todos los usuarios registrados en el bot
