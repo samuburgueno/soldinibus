@@ -1,7 +1,7 @@
 import { prisma } from "@/prisma/client";
 
 export const User = {
-  async registerUser(data, log) {
+  async registerUser(data, notify = false) {
     try {
       let user;
 
@@ -26,13 +26,15 @@ export const User = {
             tid: data.id,
           },
         });
-      }
 
-      // Enviar un mensaje de bienvenida con el nombre del usuario
-      const message = `Hola ${user.firstName}, gracias por registrarte, te avisaré cuando cambie el horario del colectivo. No tienes que hacer más nada, te enviaré un mensaje cuando detecte cambios en el horario. Verifico si hay cambios cada 10 minutos, así que no te preocupes por estar pendiente.`;
-      await fetch(
-        `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage?chat_id=${user.tid}&text=${message}&parse_mode=HTML`
-      );
+        // Enviar un mensaje de bienvenida con el nombre del usuario
+        if (notify) {
+          const message = `Hola ${user.firstName}, gracias por registrarte, te avisaré cuando cambie el horario del colectivo. No tienes que hacer más nada, te enviaré un mensaje cuando detecte cambios en el horario. Verifico si hay cambios cada 10 minutos, así que no te preocupes por estar pendiente.`;
+          await fetch(
+            `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage?chat_id=${user.tid}&text=${message}&parse_mode=HTML`
+          );
+        }
+      }
 
       return user;
     } catch (error) {
